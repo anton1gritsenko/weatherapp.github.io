@@ -1,0 +1,83 @@
+<div layout="column" ng-cloak>
+    <md-content class="md-padding">
+        <form ng-submit="$event.preventDefault()">
+            <h1 style="text-align: center">Welcome to meteorological statistic center</h1>
+            <md-autocomplete
+                    ng-disabled="vm.isDisabled"
+                    md-no-cache="vm.noCache"
+                    md-selected-item="vm.data.selectedItem"
+                    md-search-text-change="vm.searchTextChange(vm.searchText)"
+                    md-search-text="vm.searchText"
+                    md-selected-item-change="vm.selectedItemChange(item)"
+                    md-items="item in vm.querySearch(vm.searchText)"
+                    md-item-text="item"
+                    md-min-length="0"
+                    placeholder="Enter city. For example Hurn">
+                <md-item-template>
+                    <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item}}</span>
+                </md-item-template>
+                <md-not-found>
+                    No states matching "{{vm.searchText}}" were found.
+                </md-not-found>
+            </md-autocomplete>
+            <br/>
+        </form>
+        <div>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Weather info">
+                    <md-content class="md-padding">
+                        <md-toolbar class="md-table-toolbar md-default">
+                            <div class="md-toolbar-tools">
+                                <span>Meteorological stations of <b>{{vm.data.selectedItem}}</b></span>
+                            </div>
+                        </md-toolbar>
+                        <md-table-container>
+                            <table md-table>
+                                <thead md-head md-order="vm.sort" md-on-reorder="vm.loadData">
+                                <tr md-row>
+                                    <th md-column md-order-by="year"><span>Year</span></th>
+                                    <th md-column md-numeric><span>Month</span></th>
+                                    <th md-column md-order-by="tmax">Tmax(degC)</th>
+                                    <th md-column md-order-by="tmin">Tmin (degC)</th>
+                                    <th md-column md-order-by="af">Af (days)</th>
+                                    <th md-column md-order-by="rain">Rain (mm)</th>
+                                    <th md-column md-order-by="sun">Sun (hours)</th>
+                                </tr>
+                                </thead>
+                                <tbody md-body>
+                                <tr md-row ng-repeat="item in vm.data.entries">
+                                    <td md-cell>{{item.year}}</td>
+                                    <td md-cell>{{item.month}}</td>
+                                    <td md-cell>{{item.tmax}}</td>
+                                    <td md-cell>{{item.tmin}}</td>
+                                    <td md-cell>{{item.af}}</td>
+                                    <td md-cell>{{item.rain}}</td>
+                                    <td md-cell>{{item.sun}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p>Estimated data is marked with a * after the value.<br>
+                                Missing data (more than 2 days missing in month) is marked by  ---.<br>
+                                Sunshine data taken from an automatic Kipp & Zonen sensor marked with a #, otherwise sunshine data taken from a Campbell Stokes recorder.<br></p>
+                        </md-table-container>
+
+                        <md-table-pagination md-limit="vm.data.limit" md-limit-options="[5, 10, 15]"
+                                             md-page="vm.data.page"
+                                             md-total="{{vm.data.length}}"
+                                             md-on-paginate="vm.loadData" md-page-select></md-table-pagination>
+
+                    </md-content>
+                </md-tab>
+                <md-tab label="Graphic of weather">
+                    <md-content class="md-padding">
+                        <h1>Min and Max average temperature per year of <b>{{vm.data.selectedItem}}</b></h1>
+                        <canvas id="bar" class="chart chart-bar"
+                                chart-data="vm.chart.data" chart-labels="vm.chart.labels"
+                                chart-series="vm.chart.series" width="4000px">
+                        </canvas>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </div>
+    </md-content>
+</div>

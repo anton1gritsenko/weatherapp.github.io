@@ -1,0 +1,77 @@
+
+
+<div id="page" class="main-container">
+
+    <div ui-view></div>
+<style>
+
+    h1{
+        color: #00897b;
+    }
+    md-autocomplete input:not(.md-input){
+        text-transform: capitalize !important;
+    }
+    b.ng-binding{
+        text-transform: capitalize !important;
+    }
+    table.md-table thead.md-head>tr.md-row{
+        background: #50993361;
+    }
+    .md-table-pagination{
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+        -webkit-flex-wrap: wrap-reverse;
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+        box-sizing: border-box;
+        padding: 0 24px;
+        font-size: 17px;
+        color: #00897b;
+        border-top: 1px rgba(0,0,0,.12) solid;
+    }
+    .md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar{
+        color: #05ff00;
+    }
+    .md-tab.md-active{
+        color: deeppink;
+    }
+    .md-table td.md-cell{
+        color: #2f96b4;
+    }
+    .md-toolbar-tools p{
+        font-size: 14px;
+        color: gray;
+        position: absolute;
+        padding-top: 4%;
+    }
+    .md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar{
+        background:yellow;
+    }
+    .md-icon.md-default-theme, md-icon{
+        color: yellow;
+    }
+    .md-button[disabled] md-icon{
+        color: rgb(63,81,181);
+    }
+    @media screen and (max-width: 768px) {
+        h1{
+            font-size: 14px;
+        }
+        .md-toolbar-tools p{
+            display: none;
+    }
+        .md-table-pagination>.buttons:not(:first-child), .md-table-pagination>.limit-select:not(:first-child){
+            margin-left: 7px;
+        }
+    }
+
+</style>
+</div>
+
